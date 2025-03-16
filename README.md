@@ -1,6 +1,6 @@
 # 个人生词学习网站 Vocabulary-app
 
-👉 👉 [立即体验](https://vocabulary-ow7f9x79s-qiri-zhangs-projects.vercel.app/) | 📖 [开发文档](#技术架构)
+👉 👉 [立即体验](http://qiri.pythonanywhere.com/) | 📖 [开发文档](#技术架构)
 
 [![GitHub Stars](https://img.shields.io/github/stars/QiriZ/Vocabulary-app?style=social)](https://github.com/QiriZ/Vocabulary-app)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
