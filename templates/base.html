@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}个人生词学习网站{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div class="logo">
+                <h1>生词学习笔记</h1>
+            </div>
+            <nav class="app-nav">
+                <a href="{{ url_for('index') }}" class="nav-item">首页</a>
+            </nav>
+        </header>
+        
+        <main class="app-content">
+            {% block content %}{% endblock %}
+        </main>
+        
+        <footer class="app-footer">
+            <p>© 2025 Qiri Zhang个人生词学习网站 - 飞书多维表格驱动</p>
+        </footer>
+    </div>
+    
+    {% block scripts %}{% endblock %}
+</body>
+</html>

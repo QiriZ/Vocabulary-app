@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ word.input_word or word.title }} - 生词详情{% endblock %}
+
+{% block content %}
+<div class="detail-container">
+    <div class="detail-header">
+        <a href="{{ url_for('index') }}" class="back-link">
+            <span class="icon">←</span> 返回首页
+        </a>
+        <h2 class="detail-title">{{ word.input_word or word.title }}</h2>
+        
+        <div class="detail-meta">
+            {% if word.domain %}
+            <span class="tag domain-tag">{{ word.domain }}</span>
+            {% endif %}
+            
+            {% if word.position %}
+            <span class="tag position-tag">{{ word.position }}</span>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% if word.sentence %}
+    <div class="highlight-section">
+        <h3 class="section-title">这是什么</h3>
+        <div class="highlight-content">
+            {{ word.sentence }}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if word.comment %}
+    <div class="comment-section">
+        <h3 class="section-title">记忆方法</h3>
+        <div class="comment-content">
+            {{ word.comment }}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if word.content %}
+    <div class="content-section">
+        <h3 class="section-title">生活化案例</h3>
+        <div class="article-content">
+            {{ word.content | safe }}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if word.reference %}
+    <div class="reference-section">
+        <h3 class="section-title">参考资料</h3>
+        <div class="reference-content">
+            {{ word.reference | safe }}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

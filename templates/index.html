@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}首页 - 个人生词学习网站{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>我的生词笔记本</h2>
+    <p class="subtitle">知识的海洋，一词一世界</p>
+</div>
+
+<div class="word-grid">
+    {% if words %}
+        {% for word in words %}
+            <div class="word-card">
+                <h3 class="word-title">
+                    {% if word.input_word %}{{ word.input_word }}{% else %}{{ word.title }}{% endif %}
+                </h3>
+                
+                {% if word.sentence %}
+                <div class="word-definition">
+                    <strong>这是什么：</strong> {{ word.sentence }}
+                </div>
+                {% endif %}
+                
+                <div class="word-meta">
+                    {% if word.domain %}
+                    <span class="tag domain-tag">{{ word.domain }}</span>
+                    {% endif %}
+                    
+                    {% if word.position %}
+                    <span class="tag position-tag">{{ word.position }}</span>
+                    {% endif %}
+                </div>
+                
+                {% if word.comment %}
+                <div class="word-method">
+                    <strong>记忆方法：</strong> {{ word.comment }}
+                </div>
+                {% endif %}
+                
+                {% if word.preview %}
+                <div class="word-preview">
+                    <strong>生活化案例：</strong> {{ word.preview }}
+                </div>
+                {% endif %}
+                
+                <a href="{{ url_for('detail', record_id=word.id) }}" class="word-link" target="_blank">
+                    查看详情
+                    <span class="icon">→</span>
+                </a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <p>暂无生词数据，请检查飞书多维表格连接或添加数据</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
