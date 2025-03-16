@@ -2,7 +2,7 @@
 
 👉 👉 [立即体验](https://vocabulary-ow7f9x79s-qiri-zhangs-projects.vercel.app/) | 📖 [开发文档](#技术架构)
 
-[![GitHub Stars](https://img.shields.io/github/stars/QiriZ/vocab-website?style=social)](https://github.com/QiriZ/vocab-website)
+[![GitHub Stars](https://img.shields.io/github/stars/QiriZ/Vocabulary-app?style=social)](https://github.com/QiriZ/Vocabulary-app)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 *个人生词学习网站，从飞书多维表格获取数据的工作流。 灵感是阅读way to AGI社区学习资料时获得的，开源万岁*
