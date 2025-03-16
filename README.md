@@ -1,6 +1,9 @@
 # 个人生词学习网站 Vocabulary-app
 
-![Preview](https://via.placeholder.com/800x400.png?text=Apple+Style+Preview) 
+👉 👉 [立即体验](https://vocabulary-ow7f9x79s-qiri-zhangs-projects.vercel.app/) | 📖 [开发文档](#技术架构)
+
+[![GitHub Stars](https://img.shields.io/github/stars/QiriZ/vocab-website?style=social)](https://github.com/QiriZ/vocab-website)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 *个人生词学习网站，从飞书多维表格获取数据的工作流。 灵感是阅读way to AGI社区学习资料时获得的，开源万岁*
 
@@ -8,7 +11,7 @@
 
 ## 🌟 项目特色
 - **双源数据驱动**：直连飞书多维表格实时同步词库
-- **极简美学设计**：遵循苹果设计规范，融入中国红品牌色
+- **极简美学设计**：极简设计规范，融入中国红品牌色
 - **认知科学加持**：结构化呈现学科领域/产业链位置/记忆方法论
 - **场景化学习**：每个概念匹配生活案例与实践指引
 
