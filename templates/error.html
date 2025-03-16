@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="error-container">
+    <h1>出错啦！</h1>
+    <p class="error-message">抱歉，网站遇到了一些问题：</p>
+    <div class="error-details">
+        {{ error }}
+    </div>
+    <div class="error-help">
+        <p>可能的解决方法：</p>
+        <ul>
+            <li>刷新页面重试</li>
+            <li>检查网络连接</li>
+            <li>稍后再试</li>
+        </ul>
+    </div>
+    <a href="{{ url_for('home') }}" class="btn btn-primary">返回首页</a>
+</div>
+{% endblock %}
