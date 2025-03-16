@@ -2,18 +2,15 @@
 生词学习网站主应用
 功能：从飞书多维表格获取数据并展示在网页上
 """
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 import requests
 import json
 import time
 from config import Config
-import os
-from flask_cors import CORS
 
 # 创建Flask应用
 app = Flask(__name__)
 app.config.from_object(Config)
-CORS(app)
 
 # 用于存储访问令牌和过期时间
 token_info = {
@@ -172,18 +169,6 @@ def detail(record_id):
     
     return render_template('detail.html', word=word)
 
-@app.errorhandler(Exception)
-def handle_error(e):
-    """全局错误处理函数，捕获所有异常并返回友好的错误页面"""
-    app.logger.error(f"发生错误: {str(e)}")
-    return render_template('error.html', error=str(e)), 500
-
-@app.route('/health')
-def health_check():
-    """健康检查接口，用于验证应用是否正常运行"""
-    return jsonify({"status": "ok", "env": os.environ.get('VERCEL_ENV', 'development')})
-
 # 启动应用
 if __name__ == '__main__':
-    # 本地开发环境
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=app.config['DEBUG'])
