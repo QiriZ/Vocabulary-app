@@ -1,18 +1,10 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "minimal.py",
-      "use": "@vercel/python"
-    }
+    { "src": "public/**", "use": "@vercel/static" }
   ],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "minimal.py"
-    }
-  ],
-  "env": {
-    "PYTHONUNBUFFERED": "1"
-  }
+    { "src": "/(.*)", "dest": "/public/$1" },
+    { "src": "/", "dest": "/public/index.html" }
+  ]
 }

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人生词学习网站</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1e88e5;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .status {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+        }
+        .word-list {
+            margin-top: 30px;
+        }
+        .word-card {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #f1f8e9;
+            border-radius: 4px;
+            border-left: 4px solid #7cb342;
+        }
+        .word-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #33691e;
+        }
+        .word-meaning {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .word-category {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: #e8f5e9;
+            color: #388e3c;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        .refresh-tip {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>个人生词学习网站</h1>
+        
+        <div class="status">
+            🚧 网站正在建设中...
+        </div>
+        
+        <p>这是一个静态演示版本，展示了生词学习网站的基本界面。完整版正在开发中，将支持以下功能：</p>
+        
+        <ul>
+            <li>从飞书多维表格获取最新生词数据</li>
+            <li>按生成时间排序展示生词</li>
+            <li>详细的生词释义和例句展示</li>
+            <li>分类和标签管理</li>
+        </ul>
+        
+        <div class="word-list">
+            <h2>生词示例</h2>
+            
+            <div class="word-card">
+                <div class="word-title">aperiodic graph（非周期图）</div>
+                <div class="word-meaning">一种没有固定循环结构的图，表示动态变化的拓扑变换或网络形状</div>
+                <div class="word-category">AI领域</div>
+            </div>
+            
+            <div class="word-card">
+                <div class="word-title">agnostic PAC learnable（与分布无关的PAC可学习性）</div>
+                <div class="word-meaning">机器学习的一个概念，指算法可以在不确定数据的真实分布情况下进行学习</div>
+                <div class="word-category">AI领域</div>
+            </div>
+            
+            <div class="word-card">
+                <div class="word-title">NER（命名实体识别）</div>
+                <div class="word-meaning">从非结构化文本中识别并分类命名实体（如人名、地点、组织等）的自然语言处理技术</div>
+                <div class="word-category">AI领域</div>
+            </div>
+        </div>
+        
+        <div class="refresh-tip">
+            完整版网站即将上线，敬请期待！
+        </div>
+    </div>
+</body>
+</html>
