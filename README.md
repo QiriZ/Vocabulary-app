@@ -1,7 +1,7 @@
 # 个人生词学习网站 Vocabulary-app
 
 ![Preview](https://via.placeholder.com/800x400.png?text=Apple+Style+Preview) 
-*个人生词学习网站，从飞书多维表格获取数据的工作流*
+*个人生词学习网站，从飞书多维表格获取数据的工作流 灵感是阅读way to AGI社区学习资料时获得的，开源万岁*
 
 一个基于Flask构建的个人知识管理工具，通过对接飞书多维表格实现数据同步，设计风格与中国红主题色结合，提供优雅高效的学习体验。
 
