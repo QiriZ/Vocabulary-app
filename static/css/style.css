@@ -188,6 +188,9 @@ body {
     padding: 32px;
     box-shadow: var(--shadow);
     margin-bottom: 40px;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .detail-header {
@@ -220,7 +223,7 @@ body {
 }
 
 .detail-domain {
-    margin-bottom: 12px;
+    margin-bottom: 20px;
 }
 
 .detail-domain .domain-tag {
@@ -230,13 +233,19 @@ body {
 }
 
 .detail-position {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
+    width: 100%;
 }
 
 .detail-position .position-tag {
     font-size: 14px;
     padding: 6px 12px;
     font-weight: 500;
+    width: 100%;
+    max-width: 100%;
+    display: inline-block;
+    white-space: normal;
+    line-height: 1.6;
 }
 
 .detail-meta {
@@ -244,52 +253,26 @@ body {
     gap: 8px;
     margin-bottom: 16px;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .section-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
     margin-bottom: 16px;
-    color: #444;
-    position: relative;
-    padding-left: 14px;
-}
-
-.section-title::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 4px;
-    background-color: var(--primary-color);
-    border-radius: 4px;
+    color: var(--primary-color);
 }
 
 .highlight-section, .comment-section, .content-section, .reference-section {
     margin-bottom: 32px;
+    width: 100%;
 }
 
-.highlight-content {
-    background-color: rgba(229, 57, 53, 0.05);
-    border-left: 4px solid var(--primary-color);
-    padding: 16px 20px;
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    color: #555;
-    line-height: 1.7;
-}
-
-.comment-content, .article-content, .reference-content {
+.highlight-content, .comment-content, .article-content, .reference-content {
     line-height: 1.8;
+    font-size: 16px;
     color: #444;
-}
-
-.reference-content {
-    font-size: 14px;
-    color: #666;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.03);
-    border-radius: 8px;
+    width: 100%;
 }
 
 /* 响应式设计 */
@@ -299,11 +282,15 @@ body {
     }
     
     .detail-container {
-        padding: 24px;
+        padding: 20px;
     }
     
     .detail-title {
-        font-size: 26px;
+        font-size: 28px;
+    }
+    
+    .section-title {
+        font-size: 20px;
     }
 }
 

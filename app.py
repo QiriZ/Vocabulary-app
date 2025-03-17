@@ -114,13 +114,38 @@ def process_records(records):
         # 使用飞书多维表格的实际字段名称
         input_word = fields.get("生词或书目", "")
         title = fields.get("标题", "无标题")
-        sentence = fields.get("这是什么.输出结果", "")
+        sentence_raw = fields.get("这是什么.输出结果", "")
         content = fields.get("生活化案例", "")
         comment = fields.get("记忆方法", "")
         domain = fields.get("学科领域", "")
         position = fields.get("产业链位置", "")
         reference = fields.get("参考资料", "")
         created_time = fields.get("生成时间", "")
+        
+        # 处理sentence字段，从JSON结构中提取纯文本
+        sentence = ""
+        if sentence_raw:
+            try:
+                # 尝试解析JSON结构
+                if isinstance(sentence_raw, str) and (sentence_raw.startswith('[') or sentence_raw.startswith('{')):
+                    sentence_data = json.loads(sentence_raw)
+                    if isinstance(sentence_data, list):
+                        # 从列表中提取文本
+                        for item in sentence_data:
+                            if isinstance(item, dict) and 'text' in item:
+                                sentence += item['text']
+                    elif isinstance(sentence_data, dict) and 'text' in sentence_data:
+                        # 直接从字典提取文本
+                        sentence = sentence_data['text']
+                else:
+                    # 如果不是JSON结构，直接使用原始值
+                    sentence = sentence_raw
+            except (json.JSONDecodeError, TypeError):
+                # 如果JSON解析失败，使用原始值
+                sentence = sentence_raw
+        
+        # 清理sentence中的特殊字符
+        sentence = sentence.replace('\n', ' ').strip()
         
         # 内容预览（前100字）
         preview = content[:100] + "..." if len(content) > 100 else content
