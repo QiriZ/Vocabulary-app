@@ -117,8 +117,12 @@ body {
 .word-meta {
     display: flex;
     gap: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     flex-wrap: wrap;
+}
+
+.word-position {
+    margin-bottom: 12px;
 }
 
 .tag {
@@ -215,10 +219,31 @@ body {
     color: var(--primary-color);
 }
 
+.detail-domain {
+    margin-bottom: 12px;
+}
+
+.detail-domain .domain-tag {
+    font-size: 14px;
+    padding: 6px 12px;
+    font-weight: 500;
+}
+
+.detail-position {
+    margin-bottom: 16px;
+}
+
+.detail-position .position-tag {
+    font-size: 14px;
+    padding: 6px 12px;
+    font-weight: 500;
+}
+
 .detail-meta {
     display: flex;
-    gap: 10px;
-    margin-bottom: 24px;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
 }
 
 .section-title {

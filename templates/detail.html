@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ word.input_word or word.title }} - 生词详情{% endblock %}
+{% block title %}{{ word.title }} - 生词详情{% endblock %}
 
 {% block content %}
 <div class="detail-container">
@@ -8,33 +8,35 @@
         <a href="{{ url_for('index') }}" class="back-link">
             <span class="icon">←</span> 返回首页
         </a>
-        <h2 class="detail-title">{{ word.input_word or word.title }}</h2>
+        <h2 class="detail-title">{{ word.title }}</h2>
         
-        <div class="detail-meta">
-            {% if word.domain %}
+        {% if word.domain %}
+        <div class="detail-domain">
             <span class="tag domain-tag">{{ word.domain }}</span>
-            {% endif %}
-            
-            {% if word.position %}
+        </div>
+        {% endif %}
+        
+        {% if word.position %}
+        <div class="detail-position">
             <span class="tag position-tag">{{ word.position }}</span>
-            {% endif %}
         </div>
+        {% endif %}
     </div>
-    
-    {% if word.sentence %}
-    <div class="highlight-section">
-        <h3 class="section-title">这是什么</h3>
-        <div class="highlight-content">
-            {{ word.sentence }}
-        </div>
-    </div>
-    {% endif %}
     
     {% if word.comment %}
     <div class="comment-section">
         <h3 class="section-title">记忆方法</h3>
         <div class="comment-content">
             {{ word.comment }}
+        </div>
+    </div>
+    {% endif %}
+    
+    {% if word.sentence %}
+    <div class="highlight-section">
+        <h3 class="section-title">这是什么</h3>
+        <div class="highlight-content">
+            {{ word.sentence }}
         </div>
     </div>
     {% endif %}
