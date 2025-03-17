@@ -16,43 +16,41 @@
                     {{ word.input_word }}
                 </h3>
                 
-                <div class="word-meta">
-                    {% if word.domain %}
-                    <span class="tag domain-tag">{{ word.domain }}</span>
-                    {% endif %}
-                </div>
-
-                {% if word.sentence %}
-                <div class="word-position">
-                    <span class="tag position-tag">{{ word.sentence }}</span>
+                {% if word.domain %}
+                <div class="word-tag-container">
+                    <span class="tag domain-tag" style="background-color: #FFC080; color: #FFFFFF;">{{ word.domain }}</span>
                 </div>
                 {% endif %}
-
+                
+                {% if word.sentence %}
+                <div class="word-content-block">
+                    <div class="content-label">科学定义</div>
+                    <div class="content-text">{{ word.sentence }}</div>
+                </div>
+                {% endif %}
+                
                 {% if word.comment %}
-                <div class="word-method">
-                    <div class="item-label">
-                        <span class="bullet-point">•</span>
-                        <span class="label-text">记忆方法</span>
-                    </div>
-                    <div class="item-content">
-                        {{ word.comment }}
-                    </div>
+                <div class="word-content-block">
+                    <div class="content-label">记忆方法</div>
+                    <div class="content-text">{{ word.comment }}</div>
                 </div>
                 {% endif %}
 
                 {% if word.position %}
-                <div class="word-definition">
-                    <div class="item-label">
-                        <span class="bullet-point">•</span>
-                        <span class="label-text">产业链位置</span>
-                    </div>
-                    <div class="item-content">
-                        {{ word.position }}
-                    </div>
+                <div class="word-content-block">
+                    <div class="content-label">产业链位置</div>
+                    <div class="content-text">{{ word.position }}</div>
                 </div>
                 {% endif %}
                 
-                <a href="{{ url_for('detail', record_id=word.id) }}" class="word-link" target="_blank">
+                {% if word.preview %}
+                <div class="word-content-block">
+                    <div class="content-label">生活化案例</div>
+                    <div class="content-text">{{ word.preview }}</div>
+                </div>
+                {% endif %}
+                
+                <a href="{{ url_for('detail', record_id=word.id) }}" class="word-link" target="_blank" style="color: #FFC080;">
                     查看详情
                     <span class="icon">→</span>
                 </a>

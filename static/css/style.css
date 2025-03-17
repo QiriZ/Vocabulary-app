@@ -3,6 +3,7 @@
     --primary-color: #E53935; /* 中国红 */
     --secondary-color: #B71C1C; /* 深红 */
     --text-color: #333333;
+    --label-color: #8A8A8F;  /* 苹果风格标签颜色 */
     --background-color: #F5F5F7; /* 苹果风格背景 */
     --card-color: #FFFFFF;
     --border-radius: 12px;
@@ -103,44 +104,31 @@ body {
 .word-title {
     font-size: 22px;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     color: var(--primary-color);
 }
 
-.word-position, .word-method, .word-definition, .word-preview {
+/* 苹果风格内容块 */
+.word-tag-container {
+    margin-bottom: 20px;
+}
+
+.word-content-block {
+    margin-bottom: 20px;
     width: 100%;
-    padding: 12px 15px;
-    box-sizing: border-box;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    background-color: rgba(245, 245, 247, 0.5);
 }
 
-.word-position {
-    background-color: rgba(0, 128, 0, 0.05);
+.content-label {
+    font-size: 14px;
+    color: var(--label-color);
+    margin-bottom: 6px;
+    font-weight: 500;
 }
 
-.word-method {
-    background-color: rgba(255, 193, 7, 0.05);
-}
-
-.word-definition {
-    background-color: rgba(0, 0, 255, 0.05);
-}
-
-.word-preview {
-    flex-grow: 1;
-    margin-bottom: 16px;
-    color: #555;
+.content-text {
     font-size: 15px;
     line-height: 1.7;
-}
-
-.word-meta {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
+    color: #333;
 }
 
 .tag {
@@ -171,6 +159,8 @@ body {
     font-weight: 500;
     transition: var(--transition);
     align-self: flex-end;
+    margin-top: auto;
+    padding-top: 16px;
 }
 
 .word-link:hover {
@@ -223,7 +213,7 @@ body {
 }
 
 .detail-domain {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .detail-domain .domain-tag {
@@ -232,28 +222,12 @@ body {
     font-weight: 500;
 }
 
-.detail-position {
-    margin-bottom: 24px;
+.divider {
+    height: 1px;
+    background-color: rgba(229, 57, 53, 0.15);
+    margin: 20px 0;
     width: 100%;
-}
-
-.detail-position .position-tag {
-    font-size: 14px;
-    padding: 6px 12px;
-    font-weight: 500;
-    width: 100%;
-    max-width: 100%;
-    display: inline-block;
-    white-space: normal;
-    line-height: 1.6;
-}
-
-.detail-meta {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
-    width: 100%;
+    border-radius: 1px;
 }
 
 .section-title {
@@ -273,36 +247,12 @@ body {
     font-size: 16px;
     color: #444;
     width: 100%;
+    background-color: rgba(245, 245, 247, 0.7);
+    padding: 20px;
+    border-radius: 12px;
 }
 
-/* 项目符号样式 */
-.item-label {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 8px;
-}
-
-.bullet-point {
-    color: var(--primary-color);
-    font-size: 18px;
-    line-height: 1;
-    margin-right: 6px;
-}
-
-.label-text {
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--primary-color);
-}
-
-.item-content {
-    padding-left: 22px;
-    font-size: 14px;
-    line-height: 1.6;
-    color: #444;
-}
-
-/* 响应式设计 */
+/* 响应式样式 */
 @media (max-width: 768px) {
     .word-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -319,25 +269,4 @@ body {
     .section-title {
         font-size: 20px;
     }
-}
-
-/* 空状态 */
-.empty-state {
-    text-align: center;
-    padding: 60px 0;
-    grid-column: 1 / -1;
-}
-
-.empty-state p {
-    color: #777;
-    font-size: 18px;
-}
-
-/* 页脚 */
-.app-footer {
-    text-align: center;
-    margin-top: 60px;
-    padding: 20px 0;
-    color: #777;
-    font-size: 14px;
 }
