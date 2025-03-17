@@ -27,22 +27,16 @@
                     <span class="tag position-tag">{{ word.sentence }}</span>
                 </div>
                 {% endif %}
-                
-                {% if word.position %}
-                <div class="word-definition">
-                    <strong>这是什么：</strong> {{ word.position }}
-                </div>
-                {% endif %}
-                
+
                 {% if word.comment %}
                 <div class="word-method">
                     <strong>记忆方法：</strong> {{ word.comment }}
                 </div>
                 {% endif %}
                 
-                {% if word.preview %}
-                <div class="word-preview">
-                    <strong>生活化案例：</strong> {{ word.preview }}
+                {% if word.position %}
+                <div class="word-definition">
+                    <strong>产业链位置：</strong> {{ word.position }}
                 </div>
                 {% endif %}
                 
