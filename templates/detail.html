@@ -15,14 +15,17 @@
             <span class="tag domain-tag">{{ word.domain }}</span>
         </div>
         {% endif %}
-        
-        {% if word.sentence %}
-        <div class="detail-position">
-            <span class="tag position-tag">{{ word.sentence }}</span>
-        </div>
-        {% endif %}
     </div>
-    
+
+    {% if word.sentence %}
+    <div class="highlight-section">
+        <h3 class="section-title">科学定义</h3>
+        <div class="highlight-content">
+            {{ word.sentence }}
+        </div>
+    </div>
+    {% endif %}
+
     {% if word.comment %}
     <div class="comment-section">
         <h3 class="section-title">记忆方法</h3>
