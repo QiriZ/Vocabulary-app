@@ -21,7 +21,7 @@
     <div class="highlight-section">
         <h3 class="section-title">科学定义</h3>
         <div class="highlight-content">
-            {{ word.sentence }}
+            {{ word.sentence | safe }}
         </div>
     </div>
     {% endif %}
@@ -30,7 +30,7 @@
     <div class="comment-section">
         <h3 class="section-title">记忆方法</h3>
         <div class="comment-content">
-            {{ word.comment }}
+            {{ word.comment | safe }}
         </div>
     </div>
     {% endif %}
@@ -39,7 +39,7 @@
     <div class="highlight-section">
         <h3 class="section-title">产业链位置</h3>
         <div class="highlight-content">
-            {{ word.position }}
+            {{ word.position | safe }}
         </div>
     </div>
     {% endif %}
