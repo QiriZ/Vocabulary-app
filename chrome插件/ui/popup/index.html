@@ -44,41 +44,46 @@
           </select>
         </div>
 
-        <!-- 提交按钮 -->
+        <!-- 按钮区域 -->
         <div class="form-actions">
-          <button type="submit" id="submitBtn">提交保存</button>
-          <button type="button" id="viewHistoryBtn">查看历史</button>
+          <button type="submit" id="submitBtn" class="primary-btn">
+            <span class="btn-text">提交保存</span>
+            <span class="spinner"></span>
+          </button>
+          <button type="button" id="viewHistoryBtn" class="secondary-btn">查看历史</button>
+        </div>
+
+        <!-- 状态消息 -->
+        <div id="statusMessage" class="status-message">
+          <div id="statusText"></div>
         </div>
       </form>
-
-      <!-- 状态消息区域 -->
-      <div id="statusMessage" class="status-message"></div>
     </main>
 
-    <!-- 模态框：历史记录 -->
+    <!-- 历史记录模态框 -->
     <div id="historyModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
           <h2>历史记录</h2>
           <button id="closeModal">&times;</button>
         </div>
-        
         <div class="modal-body">
-          <!-- 搜索输入框 -->
           <div class="search-container">
             <input type="text" id="searchHistory" placeholder="搜索历史记录...">
           </div>
-
-          <!-- 历史记录列表 -->
           <ul id="historyList" class="history-list">
-            <!-- 历史记录项会动态添加到这里 -->
+            <!-- 历史记录项会动态插入到这里 -->
           </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 脚本放在最后，确保DOM已加载 -->
+  <!-- 联系信息 -->
+  <div class="contact-info">
+    <p>如有改进需求，请联系：19946286616（微信同号）</p>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

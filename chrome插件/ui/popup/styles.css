@@ -1,109 +1,151 @@
+/* 
+ * styles.css - 弹出窗口样式表
+ * 中国红风格，遵循苹果设计美学
+ */
+
+/* 定义颜色变量 */
+:root {
+  --china-red: #CB0A0A;        /* 中国红 */
+  --china-red-dark: #A00000;   /* 深红色 */
+  --china-red-light: #FFEFEF;  /* 浅红色背景 */
+  --gold: #E6B422;             /* 金色点缀 */
+  --text-dark: #333333;        /* 主文本色 */
+  --text-light: #FFFFFF;       /* 亮文本色 */
+  --text-gray: #8A8A8A;        /* 灰色文本 */
+  --background: #F5F5F7;       /* 苹果风格背景色 */
+  --card-bg: #FFFFFF;          /* 卡片背景 */
+  --border-light: #E8E8E8;     /* 边框浅色 */
+  --success-color: #34C759;    /* 苹果风格成功色 */
+  --error-color: #FF3B30;      /* 苹果风格错误色 */
+}
+
 /* 全局样式 */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'PingFang SC', 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
 }
 
 body {
-  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #f9f9f9;
+  line-height: 1.5;
+  color: var(--text-dark);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
   width: 100%;
   min-width: 320px;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
 }
 
 /* 头部样式 */
 header {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   text-align: center;
 }
 
 h1 {
-  color: #1e88e5;
+  color: var(--china-red);
   font-size: 24px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .subtitle {
-  color: #757575;
+  color: var(--text-gray);
   font-size: 14px;
 }
 
 /* 表单样式 */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
-  color: #555;
+  margin-bottom: 6px;
+  color: var(--text-dark);
   font-weight: 500;
+  font-size: 14px;
 }
 
 input[type="text"],
 select {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
+  padding: 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  outline: none;
+}
+
+input[type="text"]:focus,
+select:focus {
+  border-color: var(--china-red);
+  box-shadow: 0 0 0 3px rgba(203, 10, 10, 0.1);
 }
 
 .large-text {
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 /* 按钮样式 */
-.form-actions {
+.primary-btn, .secondary-btn {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-button {
-  padding: 10px 15px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 12px;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
 }
 
-#submitBtn {
-  background-color: #1e88e5;
-  color: white;
-  flex: 2;
+.primary-btn {
+  background-color: var(--china-red);
+  color: var(--text-light);
 }
 
-#submitBtn:hover {
-  background-color: #1976d2;
+.primary-btn:hover {
+  background-color: var(--china-red-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(203, 10, 10, 0.2);
 }
 
-#viewHistoryBtn {
-  background-color: #f5f5f5;
-  color: #333;
-  flex: 1;
+.secondary-btn {
+  background-color: var(--china-red-light);
+  color: var(--china-red);
+  border: 1px solid rgba(203, 10, 10, 0.2);
 }
 
-#viewHistoryBtn:hover {
-  background-color: #e0e0e0;
+.secondary-btn:hover {
+  background-color: rgba(203, 10, 10, 0.1);
+}
+
+.primary-btn:disabled {
+  background-color: #CCCCCC;
+  cursor: not-allowed;
 }
 
 /* 状态消息 */
 .status-message {
-  padding: 10px;
+  padding: 12px;
   margin-top: 20px;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 14px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -114,13 +156,15 @@ button {
 }
 
 .status-message.success {
-  background-color: #e8f5e9;
-  color: #2e7d32;
+  background-color: rgba(52, 199, 89, 0.1);
+  color: var(--success-color);
+  border: 1px solid rgba(52, 199, 89, 0.2);
 }
 
 .status-message.error {
-  background-color: #ffebee;
-  color: #c62828;
+  background-color: rgba(255, 59, 48, 0.1);
+  color: var(--error-color);
+  border: 1px solid rgba(255, 59, 48, 0.2);
 }
 
 /* 历史记录模态框 */
@@ -133,6 +177,8 @@ button {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 
 .modal-content {
@@ -140,9 +186,9 @@ button {
   margin: 10% auto;
   width: 90%;
   max-width: 500px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
 
@@ -150,8 +196,8 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  background-color: #1e88e5;
+  padding: 16px 20px;
+  background-color: var(--china-red);
   color: white;
 }
 
@@ -175,16 +221,30 @@ button {
   overflow-y: auto;
 }
 
+/* 联系信息样式 */
+.contact-info {
+  text-align: center;
+  padding: 12px 0;
+  margin-top: 8px;
+}
+
+.contact-info p {
+  color: var(--text-gray);
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 /* 搜索框 */
 .search-container {
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
 #searchHistory {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  font-size: 14px;
 }
 
 /* 历史记录列表 */
@@ -193,8 +253,15 @@ button {
 }
 
 .history-item {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-light);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  transition: background-color 0.2s;
+}
+
+.history-item:hover {
+  background-color: var(--china-red-light);
 }
 
 .history-item:last-child {
@@ -202,39 +269,50 @@ button {
 }
 
 .history-word {
-  font-weight: bold;
-  color: #1e88e5;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--china-red);
+  margin-bottom: 4px;
 }
 
-.history-meta {
-  display: flex;
-  justify-content: space-between;
-  color: #757575;
+.history-industry {
+  font-size: 14px;
+  color: var(--text-gray);
+}
+
+.history-url, .history-time {
   font-size: 12px;
-  margin-top: 5px;
+  color: var(--text-gray);
+  margin-top: 4px;
 }
 
-.history-link {
-  color: #1e88e5;
-  text-decoration: none;
+/* 加载动画 */
+.spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 8px;
 }
 
-.history-link:hover {
-  text-decoration: underline;
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-/* 响应式设计 */
-@media (max-width: 480px) {
+/* 响应式调整 */
+@media (max-width: 380px) {
   .container {
-    padding: 15px;
+    padding: 16px;
   }
   
-  .form-actions {
-    flex-direction: column;
+  h1 {
+    font-size: 22px;
   }
   
-  .modal-content {
-    width: 95%;
-    margin: 5% auto;
+  .form-group {
+    margin-bottom: 14px;
   }
 }
