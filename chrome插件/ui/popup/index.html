@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生词一键学习小助手</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>生词一键学习</h1>
+      <p class="subtitle">选中网页中的生词，一键保存到在线网页</p>
+    </header>
+
+    <main>
+      <!-- 表单区域 -->
+      <form id="wordForm">
+        <!-- 账户名输入 -->
+        <div class="form-group">
+          <label for="username">账户名字</label>
+          <input type="text" id="username" name="username" placeholder="请输入您的账户名称" required>
+        </div>
+
+        <!-- 词语输入（字号稍大） -->
+        <div class="form-group">
+          <label for="word">词语</label>
+          <input type="text" id="word" name="word" class="large-text" placeholder="选中的词语将自动填充" required>
+        </div>
+
+        <!-- 行业分类输入 -->
+        <div class="form-group">
+          <label for="industry">行业分类</label>
+          <select id="industry" name="industry" required>
+            <option value="">-- 请选择行业 --</option>
+            <option value="半导体">半导体</option>
+            <option value="AI大模型">AI大模型</option>
+            <option value="机器人">机器人</option>
+            <option value="计算机">计算机</option>
+            <option value="新词">新词</option>
+            <option value="生物医药">生物医药</option>
+            <option value="金融">金融</option>
+            <option value="产业链其他">产业链其他</option>
+          </select>
+        </div>
+
+        <!-- 提交按钮 -->
+        <div class="form-actions">
+          <button type="submit" id="submitBtn">提交保存</button>
+          <button type="button" id="viewHistoryBtn">查看历史</button>
+        </div>
+      </form>
+
+      <!-- 状态消息区域 -->
+      <div id="statusMessage" class="status-message"></div>
+    </main>
+
+    <!-- 模态框：历史记录 -->
+    <div id="historyModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>历史记录</h2>
+          <button id="closeModal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+          <!-- 搜索输入框 -->
+          <div class="search-container">
+            <input type="text" id="searchHistory" placeholder="搜索历史记录...">
+          </div>
+
+          <!-- 历史记录列表 -->
+          <ul id="historyList" class="history-list">
+            <!-- 历史记录项会动态添加到这里 -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 脚本放在最后，确保DOM已加载 -->
+  <script src="script.js"></script>
+</body>
+</html>

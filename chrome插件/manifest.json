@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "生词一键学习小助手",
+  "version": "1.0.0",
+  "description": "选中网页生词后右键保存，并一键同步到在线网页",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "notifications"
+  ],
+  "optional_permissions": [
+    "sidePanel"
+  ],
+  "background": {
+    "service_worker": "service_worker/main.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "生词一键学习小助手",
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content_scripts/selection.js"]
+    }
+  ],
+  "side_panel": {
+    "default_path": "ui/sidepanel/index.html"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      }
+    }
+  }
+}

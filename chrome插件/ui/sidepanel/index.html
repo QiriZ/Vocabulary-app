@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生词一键学习与飞书保存</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>生词一键学习</h1>
+      <p class="subtitle">选中网页中的生词，一键保存到飞书</p>
+    </header>
+
+    <main>
+      <!-- 表单区域 -->
+      <form id="wordForm">
+        <!-- 账户名输入 -->
+        <div class="form-group">
+          <label for="username">账户名字</label>
+          <input type="text" id="username" name="username" placeholder="请输入您的账户名称" required>
+        </div>
+
+        <!-- 词语输入（字号稍大） -->
+        <div class="form-group">
+          <label for="word">词语</label>
+          <input type="text" id="word" name="word" class="large-text" placeholder="选中的词语将自动填充" required>
+        </div>
+
+        <!-- 行业分类输入 -->
+        <div class="form-group">
+          <label for="industry">行业</label>
+          <input type="text" id="industry" name="industry" placeholder="请输入词语所属行业" list="industryList" required>
+          <datalist id="industryList">
+            <option value="半导体">
+            <option value="AI大模型">
+            <option value="机器人">
+            <option value="计算机">
+            <option value="新词">
+            <option value="生物医药">
+            <option value="金融">
+            <option value="产业链其他">
+          </datalist>
+        </div>
+
+        <!-- 提交按钮 -->
+        <button type="submit" id="submitBtn" class="primary-btn">
+          <span class="btn-text">提交到飞书</span>
+          <span class="spinner" id="submitSpinner"></span>
+        </button>
+      </form>
+
+      <!-- 查看历史记录按钮 -->
+      <button id="viewHistoryBtn" class="secondary-btn">查看历史记录</button>
+    </main>
+
+    <!-- 状态消息区域 -->
+    <div id="statusMessage" class="status-message" role="alert" aria-live="polite"></div>
+
+    <!-- 历史记录模态框 -->
+    <div id="historyModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>历史记录</h2>
+          <span id="closeModal" class="close-btn">&times;</span>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="searchHistory" placeholder="搜索历史记录..." class="search-input">
+          <div id="historyList" class="history-list">
+            <!-- 历史记录将通过JavaScript动态添加 -->
+            <div class="history-empty">暂无历史记录</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

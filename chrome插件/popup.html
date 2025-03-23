@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生词一键学习与飞书保存</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 16px;
+      font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+    
+    h1 {
+      font-size: 18px;
+      color: #1e88e5;
+      margin-bottom: 8px;
+    }
+    
+    p {
+      font-size: 14px;
+      color: #757575;
+      margin-bottom: 16px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #1e88e5;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background: #1976d2;
+    }
+    
+    .info {
+      margin-top: 16px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #757575;
+    }
+  </style>
+</head>
+<body>
+  <h1>生词一键学习与飞书保存</h1>
+  <p>在网页中选中生词，右键点击"保存到生词本"，即可添加到您的词库。</p>
+  
+  <button id="openSidePanel">打开侧边栏</button>
+  
+  <div class="info">
+    <p>注意：如果右键菜单点击后侧边栏没有自动打开，请点击上方按钮手动打开侧边栏。</p>
+    <p>快捷键：Ctrl+Shift+Y (Windows/Linux) 或 Cmd+Shift+Y (Mac)</p>
+  </div>
+  
+  <!-- 使用外部脚本文件替代内联脚本 -->
+  <script src="popup.js"></script>
+</body>
+</html>
