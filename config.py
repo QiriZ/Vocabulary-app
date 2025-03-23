@@ -12,7 +12,7 @@ class Config:
     """
     # 飞书应用配置 - 直接设置值而不是通过环境变量
     FEISHU_APP_ID = "cli_a75c9fd3d739d01c"
-    FEISHU_APP_SECRET = "Fv9eox66YI74zlIjE1VMNpfuJ1TCUVqUo"
+    FEISHU_APP_SECRET = "v9eox66YI74zlIjE1VMNpfuJ1TCUVqUo"
     
     # 多维表格配置 - 直接设置值而不是通过环境变量
     BASE_ID = "KQOCbxJmcarEi0sfi7TcOBZpnUf"

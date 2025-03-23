@@ -127,9 +127,20 @@ def get_bitable_records():
         "Authorization": f"Bearer {access_token}"
     }
     
+    # 如果用户已登录，只获取与该用户关联的词汇
+    params = {}
+    if 'user_id' in session:
+        # 添加过滤条件，只获取"填写代号"字段等于当前用户ID的记录
+        params["filter"] = f"CurrentValue.[填写代号] = \"{session['user_id']}\""
+    
     try:
-        response = requests.get(url, headers=headers)
+        print(f"请求参数: {params}")  # 调试日志
+        response = requests.get(url, headers=headers, params=params)
         response_data = response.json()
+        
+        # 打印完整的响应数据，用于调试
+        print("飞书API响应内容：")
+        print(json.dumps(response_data, indent=2, ensure_ascii=False))
         
         if response_data.get("code") == 0:
             items = response_data.get("data", {}).get("items", [])

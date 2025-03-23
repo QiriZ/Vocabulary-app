@@ -445,6 +445,35 @@ body {
     border-color: var(--primary-color);
 }
 
+/* 苹果风格页脚 */
+.app-footer {
+    padding: 20px 0;
+    margin-top: 60px;
+}
+
+.apple-style-footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #86868b; /* 苹果官网风格的浅灰色文本 */
+    font-size: 12px;
+    font-weight: 400;
+    border-top: var(--apple-border);
+    margin-top: 60px;
+    width: 100%;
+    background-color: var(--background-color);
+    position: relative;
+    bottom: 0;
+}
+
+.apple-style-footer p {
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.apple-style-footer p:hover {
+    opacity: 1;
+}
+
 /* 响应式调整 */
 @media (max-width: 768px) {
     .word-grid {
