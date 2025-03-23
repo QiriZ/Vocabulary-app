@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}注册 - 生词学习笔记{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2 class="auth-title">用户注册</h2>
+        
+        {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        <form action="{{ url_for('register') }}" method="post" class="auth-form" id="register-form">
+            <div class="form-group">
+                <label for="user_id">用户代号</label>
+                <input type="text" id="user_id" name="user_id" required class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" required class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">确认密码</label>
+                <input type="password" id="confirm_password" name="confirm_password" required class="form-input">
+                <div class="password-mismatch-error" style="display: none; color: red;">两次输入的密码不一致</div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn primary-btn">注册</button>
+            </div>
+            
+            <div class="form-footer">
+                <p>已有账号？<a href="{{ url_for('login') }}" class="text-link">返回登录</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('register-form');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const errorMessage = document.querySelector('.password-mismatch-error');
+        
+        // 实时检查密码是否一致
+        confirmPassword.addEventListener('input', function() {
+            if (password.value !== confirmPassword.value) {
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
+        
+        // 提交前验证
+        form.addEventListener('submit', function(e) {
+            if (password.value !== confirmPassword.value) {
+                e.preventDefault();
+                errorMessage.style.display = 'block';
+            }
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

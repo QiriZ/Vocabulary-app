@@ -15,6 +15,17 @@
             </div>
             <nav class="app-nav">
                 <a href="{{ url_for('index') }}" class="nav-item">首页</a>
+                {% if current_user %}
+                <div class="user-info">
+                    <span class="user-id">{{ current_user }}</span>
+                    <form action="{{ url_for('logout') }}" method="post" style="display: inline;">
+                        <button type="submit" class="logout-btn">退出</button>
+                    </form>
+                </div>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="nav-item">登录</a>
+                <a href="{{ url_for('register') }}" class="nav-item">注册</a>
+                {% endif %}
             </nav>
         </header>
         
@@ -23,7 +34,7 @@
         </main>
         
         <footer class="app-footer">
-            <p>© 2025 Qiri Zhang个人生词学习网站 - 飞书多维表格驱动</p>
+            <p>&copy; 2025 Qiri Zhang个人生词学习网站 - 飞书多维表格驱动</p>
         </footer>
     </div>
     
