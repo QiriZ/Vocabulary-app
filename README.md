@@ -3,6 +3,7 @@
 ![Flask](https://img.shields.io/badge/Flask-2.0.1-blue)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.0-purple)
 
+飞书文档说明：https://l93sy3jua5.feishu.cn/docx/XQRBdNEL2oUEG3xfka6cxTwrnwO?from=from_copylink
 
 这是一个基于 Flask 的个人生词学习网站，可以随时桌面划词录入生词。采用苹果设计风格，融入中国红主题色，提供简洁优雅的学习体验。
 
