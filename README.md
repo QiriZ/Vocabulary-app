@@ -1,6 +1,10 @@
-# 个人生词学习网站（飞书多维表格驱动）
+# 个人生词学习网站
+![版本](https://img.shields.io/badge/版本-1.0.0-orange)
+![Flask](https://img.shields.io/badge/Flask-2.0.1-blue)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.0-purple)
 
-这是一个基于 Flask 的个人生词学习网站，数据来源于飞书多维表格。采用苹果设计风格，融入中国红主题色，提供简洁优雅的学习体验。
+
+这是一个基于 Flask 的个人生词学习网站，可以随时桌面划词录入生词。采用苹果设计风格，融入中国红主题色，提供简洁优雅的学习体验。
 
 ## 功能特点
 
