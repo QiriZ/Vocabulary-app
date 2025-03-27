@@ -2,6 +2,9 @@
 ![版本](https://img.shields.io/badge/版本-1.0.0-orange)
 ![Flask](https://img.shields.io/badge/Flask-2.0.1-blue)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.0-purple)
+[![GitHub Stars](https://img.shields.io/github/stars/QiriZ/Vocabulary-app?style=social)](https://github.com/QiriZ/Vocabulary-app)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 
 飞书文档说明：https://l93sy3jua5.feishu.cn/docx/XQRBdNEL2oUEG3xfka6cxTwrnwO?from=from_copylink
 
