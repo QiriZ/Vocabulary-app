@@ -1,0 +1,35 @@
+<svg width="350" height="450" viewBox="0 0 350 450" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="350" height="450" rx="10" ry="10" fill="#f8f8f8"/>
+  
+  <!-- 顶部标题栏 -->
+  <rect width="350" height="50" rx="10" ry="10" fill="#D32F2F"/>
+  <text x="175" y="32" font-family="SF Pro Display, -apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="600" fill="white" text-anchor="middle">生词学习系统</text>
+  
+  <!-- 账户名称输入框 -->
+  <text x="30" y="80" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" fill="#333333">账户名称</text>
+  <rect x="30" y="90" width="290" height="40" rx="8" ry="8" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+  <text x="45" y="115" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" fill="#666666">张三</text>
+  
+  <!-- 生词输入栏 -->
+  <text x="30" y="160" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" fill="#333333">生词</text>
+  <rect x="30" y="170" width="290" height="50" rx="8" ry="8" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+  <text x="45" y="200" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="18" fill="#333333">semiconductor</text>
+  
+  <!-- 学科领域下拉框 -->
+  <text x="30" y="250" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" fill="#333333">学科领域</text>
+  <rect x="30" y="260" width="290" height="40" rx="8" ry="8" fill="white" stroke="#E0E0E0" stroke-width="1"/>
+  <text x="45" y="285" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" fill="#333333">半导体</text>
+  <path d="M300 280 L290 270 L310 270 Z" fill="#666666"/>
+  
+  <!-- 提交按钮 -->
+  <rect x="30" y="320" width="290" height="45" rx="22.5" ry="22.5" fill="#D32F2F"/>
+  <text x="175" y="348" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="500" fill="white" text-anchor="middle">添加到生词本</text>
+  
+  <!-- 查看历史记录按钮 -->
+  <text x="175" y="390" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" fill="#D32F2F" text-anchor="middle" text-decoration="underline">查看历史记录</text>
+  
+  <!-- 网站跳转按钮 -->
+  <rect x="30" y="410" width="290" height="40" rx="20" ry="20" fill="white" stroke="#D32F2F" stroke-width="2"/>
+  <text x="175" y="435" font-family="SF Pro Text, -apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="500" fill="#D32F2F" text-anchor="middle">前往生词学习系统</text>
+</svg>
