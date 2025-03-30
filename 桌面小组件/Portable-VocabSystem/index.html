@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生词学习系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    body {
+      background-color: transparent;
+    }
+    
+    .container {
+      width: 400px;
+      height: 900px;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .header {
+      background-color: #D32F2F;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .form-container {
+      padding: 20px 30px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+      color: #333333;
+    }
+    
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #E0E0E0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+    
+    .form-group input:focus, .form-group select:focus {
+      border-color: #D32F2F;
+      box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
+    }
+    
+    .word-input {
+      font-size: 18px !important;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 12px 0;
+      background-color: #D32F2F;
+      color: white;
+      border: none;
+      border-radius: 22.5px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 10px;
+    }
+    
+    .submit-btn:hover {
+      background-color: #C62828;
+    }
+    
+    .submit-btn:disabled {
+      background-color: #E0E0E0;
+      color: #9E9E9E;
+      cursor: not-allowed;
+    }
+    
+    .history-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #D32F2F;
+      text-decoration: underline;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .website-btn {
+      display: block;
+      width: 100%;
+      padding: 10px 0;
+      background-color: white;
+      color: #D32F2F;
+      border: 2px solid #D32F2F;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .website-btn:hover {
+      background-color: #FFEBEE;
+    }
+    
+    .status-message {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      text-align: center;
+      display: none;
+    }
+    
+    .success {
+      background-color: #E8F5E9;
+      color: #2E7D32;
+      border: 1px solid #A5D6A7;
+    }
+    
+    .error {
+      background-color: #FFEBEE;
+      color: #C62828;
+      border: 1px solid #EF9A9A;
+    }
+    
+    .offline {
+      background-color: #FFF8E1;
+      color: #F57F17;
+      border: 1px solid #FFE082;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>生词学习系统</h1>
+    </div>
+    
+    <div class="form-container">
+      <form id="vocabularyForm">
+        <div class="form-group">
+          <label for="accountName">账户名称</label>
+          <input type="text" id="accountName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="word">生词</label>
+          <input type="text" id="word" class="word-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="industry">学科领域</label>
+          <select id="industry" required>
+            <option value="" disabled selected>请选择学科领域</option>
+            <option value="半导体">半导体</option>
+            <option value="AI大模型">AI大模型</option>
+            <option value="机器人">机器人</option>
+            <option value="计算机">计算机</option>
+            <option value="新词">新词</option>
+            <option value="生物医药">生物医药</option>
+            <option value="金融">金融</option>
+            <option value="产业链其他">产业链其他</option>
+          </select>
+        </div>
+        
+        <button type="submit" id="submitBtn" class="submit-btn" disabled>添加到生词本</button>
+        
+        <div id="statusMessage" class="status-message"></div>
+      </form>
+      
+      <a id="historyLink" class="history-link">查看历史记录</a>
+      
+      <button id="websiteBtn" class="website-btn">前往生词学习系统</button>
+    </div>
+  </div>
+  
+  <script>
+    // 导入Electron模块
+    const { ipcRenderer, shell } = require('electron');
+    const Store = require('electron-store');
+    
+    // 初始化本地存储
+    const store = new Store();
+    
+    // 获取DOM元素
+    const accountNameInput = document.getElementById('accountName');
+    const wordInput = document.getElementById('word');
+    const industrySelect = document.getElementById('industry');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusMessage = document.getElementById('statusMessage');
+    const historyLink = document.getElementById('historyLink');
+    const websiteBtn = document.getElementById('websiteBtn');
+    const vocabularyForm = document.getElementById('vocabularyForm');
+    
+    // 加载保存的账户名称
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedAccountName = store.get('accountName');
+      if (savedAccountName) {
+        accountNameInput.value = savedAccountName;
+      }
+      
+      // 检查表单是否有效
+      checkFormValidity();
+    });
+    
+    // 监听从主进程发送的选中文本
+    ipcRenderer.on('selected-text', (event, text) => {
+      if (text && text.trim() !== '') {
+        wordInput.value = text.trim();
+        // 检查表单是否有效
+        checkFormValidity();
+      }
+    });
+    
+    // 表单输入变化时检查有效性
+    accountNameInput.addEventListener('input', checkFormValidity);
+    wordInput.addEventListener('input', checkFormValidity);
+    industrySelect.addEventListener('change', checkFormValidity);
+    
+    // 检查表单是否有效
+    function checkFormValidity() {
+      const isValid = 
+        accountNameInput.value.trim() !== '' && 
+        wordInput.value.trim() !== '' && 
+        industrySelect.value !== '';
+      
+      submitBtn.disabled = !isValid;
+    }
+    
+    // 表单提交处理
+    vocabularyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // 保存账户名称
+      store.set('accountName', accountNameInput.value.trim());
+      
+      // 准备提交数据
+      const data = {
+        accountName: accountNameInput.value.trim(),
+        word: wordInput.value.trim(),
+        industry: industrySelect.value,
+        sourceUrl: '',  // 桌面应用无法获取URL，可以留空或设置为特定值
+        timestamp: new Date().toISOString()
+      };
+      
+      try {
+        // 禁用提交按钮，防止重复提交
+        submitBtn.disabled = true;
+        
+        // 发送数据到主进程进行处理
+        const result = await ipcRenderer.invoke('submit-vocabulary', data);
+        
+        // 显示成功消息
+        showStatusMessage('success', '添加成功！');
+        
+        // 清空生词输入框和学科领域选择
+        wordInput.value = '';
+        industrySelect.value = '';
+        
+        // 重新检查表单有效性
+        checkFormValidity();
+      } catch (error) {
+        console.error('提交失败:', error);
+        
+        if (error.message === 'offline') {
+          // 离线状态处理
+          showStatusMessage('offline', '当前处于离线状态，数据已保存，将在网络恢复后同步');
+          
+          // 保存到离线队列
+          const offlineQueue = store.get('offlineQueue') || [];
+          offlineQueue.push(data);
+          store.set('offlineQueue', offlineQueue);
+          
+          // 清空生词输入框和学科领域选择
+          wordInput.value = '';
+          industrySelect.value = '';
+        } else {
+          // 其他错误
+          showStatusMessage('error', `提交失败: ${error.message}`);
+        }
+      } finally {
+        // 重新检查表单有效性
+        checkFormValidity();
+      }
+    });
+    
+    // 显示状态消息
+    function showStatusMessage(type, message) {
+      statusMessage.textContent = message;
+      statusMessage.className = `status-message ${type}`;
+      statusMessage.style.display = 'block';
+      
+      // 3秒后隐藏消息
+      setTimeout(() => {
+        statusMessage.style.display = 'none';
+      }, 3000);
+    }
+    
+    // 查看历史记录
+    historyLink.addEventListener('click', () => {
+      const accountName = document.getElementById('accountName').value;
+      if (accountName) {
+        // 将当前账户名称传递给主进程
+        ipcRenderer.send('open-history-window', accountName);
+      } else {
+        alert('请先输入账户名称');
+      }
+    });
+    
+    // 前往生词学习系统网站
+    websiteBtn.addEventListener('click', () => {
+      shell.openExternal('http://qiri.pythonanywhere.com');
+    });
+  </script>
+</body>
+</html>

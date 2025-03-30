@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>历史记录 - 生词学习系统</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    body {
+      background-color: #f8f8f8;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .header {
+      background-color: #D32F2F;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px 10px 0 0;
+      margin-bottom: 20px;
+    }
+    
+    .header h1 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .back-btn {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .back-btn:hover {
+      opacity: 1;
+    }
+    
+    .filter-section {
+      background-color: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .filter-group label {
+      font-size: 12px;
+      color: #666666;
+    }
+    
+    .filter-group select, .filter-group input {
+      padding: 8px 10px;
+      border: 1px solid #E0E0E0;
+      border-radius: 5px;
+      font-size: 12px;
+      outline: none;
+      min-width: 120px;
+    }
+    
+    .search-group {
+      flex-grow: 1;
+      position: relative;
+    }
+    
+    .search-group input {
+      width: 100%;
+      padding-right: 40px;
+    }
+    
+    .search-btn {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #D32F2F;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    
+    .table-container {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    thead {
+      background-color: #F5F5F5;
+    }
+    
+    th, td {
+      padding: 12px 15px;
+      text-align: left;
+      font-size: 14px;
+    }
+    
+    th {
+      font-weight: 500;
+      color: #333333;
+    }
+    
+    td {
+      border-top: 1px solid #E0E0E0;
+    }
+    
+    tr:hover {
+      background-color: #F9F9F9;
+    }
+    
+    .url-link {
+      color: #1976D2;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      background-color: white;
+      border-radius: 20px;
+      padding: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .page-btn {
+      background: none;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      color: #666666;
+      font-size: 14px;
+    }
+    
+    .page-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .active-page {
+      background-color: #D32F2F;
+      color: white;
+    }
+    
+    .inactive-page {
+      background-color: white;
+      color: #666666;
+      border: 1px solid #E0E0E0;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .action-btn {
+      padding: 8px 15px;
+      border-radius: 15px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .edit-btn, .delete-btn {
+      background-color: #D32F2F;
+      color: white;
+    }
+    
+    .export-btn {
+      background-color: white;
+      color: #D32F2F;
+      border: 2px solid #D32F2F;
+    }
+    
+    .no-data {
+      text-align: center;
+      padding: 30px;
+      color: #666666;
+      font-size: 16px;
+    }
+    
+    /* 编辑模态框样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background-color: white;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333333;
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #666666;
+    }
+    
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .modal-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .modal-form-group label {
+      font-size: 14px;
+      color: #333333;
+    }
+    
+    .modal-form-group input, .modal-form-group select {
+      padding: 10px;
+      border: 1px solid #E0E0E0;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .modal-btn {
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .modal-cancel {
+      background-color: #F5F5F5;
+      border: none;
+      color: #333333;
+    }
+    
+    .modal-save {
+      background-color: #D32F2F;
+      border: none;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <button class="back-btn" id="backBtn">←</button>
+      <h1>历史记录</h1>
+    </div>
+    
+    <div class="filter-section">
+      <div class="filter-group">
+        <label for="industryFilter">学科领域</label>
+        <select id="industryFilter">
+          <option value="all">全部</option>
+          <option value="半导体">半导体</option>
+          <option value="AI大模型">AI大模型</option>
+          <option value="机器人">机器人</option>
+          <option value="计算机">计算机</option>
+          <option value="新词">新词</option>
+          <option value="生物医药">生物医药</option>
+          <option value="金融">金融</option>
+          <option value="产业链其他">产业链其他</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <label for="timeFilter">时间范围</label>
+        <select id="timeFilter">
+          <option value="all">全部时间</option>
+          <option value="today">今天</option>
+          <option value="week">最近一周</option>
+          <option value="month">最近一个月</option>
+          <option value="year">最近一年</option>
+        </select>
+      </div>
+      
+      <div class="filter-group search-group">
+        <label for="searchInput">关键词搜索</label>
+        <input type="text" id="searchInput" placeholder="搜索生词...">
+        <button class="search-btn" id="searchBtn">+</button>
+      </div>
+    </div>
+    
+    <div class="action-buttons">
+      <button class="action-btn edit-btn" id="editBtn" disabled>编辑</button>
+      <button class="action-btn delete-btn" id="deleteBtn" disabled>删除</button>
+      <button class="action-btn export-btn" id="exportBtn">导出CSV</button>
+    </div>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>生词</th>
+            <th>学科领域</th>
+            <th>创建时间</th>
+            <th>来源URL</th>
+          </tr>
+        </thead>
+        <tbody id="recordsTableBody">
+          <!-- 数据将通过JavaScript动态加载 -->
+        </tbody>
+      </table>
+      <div id="noDataMessage" class="no-data" style="display: none;">暂无数据</div>
+    </div>
+    
+    <div class="pagination" id="pagination">
+      <button class="page-btn" id="prevPageBtn">上一页</button>
+      <div id="pageNumbers"></div>
+      <button class="page-btn" id="nextPageBtn">下一页</button>
+    </div>
+  </div>
+  
+  <!-- 编辑模态框 -->
+  <div class="modal" id="editModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">编辑生词</div>
+        <button class="modal-close" id="modalCloseBtn">×</button>
+      </div>
+      <div class="modal-form">
+        <div class="modal-form-group">
+          <label for="editWord">生词</label>
+          <input type="text" id="editWord">
+        </div>
+        <div class="modal-form-group">
+          <label for="editIndustry">学科领域</label>
+          <select id="editIndustry">
+            <option value="半导体">半导体</option>
+            <option value="AI大模型">AI大模型</option>
+            <option value="机器人">机器人</option>
+            <option value="计算机">计算机</option>
+            <option value="新词">新词</option>
+            <option value="生物医药">生物医药</option>
+            <option value="金融">金融</option>
+            <option value="产业链其他">产业链其他</option>
+          </select>
+        </div>
+        <div class="modal-form-group">
+          <label for="editUrl">来源URL</label>
+          <input type="text" id="editUrl">
+        </div>
+        <input type="hidden" id="editRecordId">
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn modal-cancel" id="modalCancelBtn">取消</button>
+        <button class="modal-btn modal-save" id="modalSaveBtn">保存</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // 导入Electron模块
+    const { ipcRenderer, shell } = require('electron');
+    
+    // 获取DOM元素
+    const backBtn = document.getElementById('backBtn');
+    const industryFilter = document.getElementById('industryFilter');
+    const timeFilter = document.getElementById('timeFilter');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const recordsTableBody = document.getElementById('recordsTableBody');
+    const noDataMessage = document.getElementById('noDataMessage');
+    const pagination = document.getElementById('pagination');
+    const pageNumbers = document.getElementById('pageNumbers');
+    const prevPageBtn = document.getElementById('prevPageBtn');
+    const nextPageBtn = document.getElementById('nextPageBtn');
+    const editBtn = document.getElementById('editBtn');
+    const deleteBtn = document.getElementById('deleteBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    
+    // 编辑模态框元素
+    const editModal = document.getElementById('editModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalCancelBtn = document.getElementById('modalCancelBtn');
+    const modalSaveBtn = document.getElementById('modalSaveBtn');
+    const editWord = document.getElementById('editWord');
+    const editIndustry = document.getElementById('editIndustry');
+    const editUrl = document.getElementById('editUrl');
+    const editRecordId = document.getElementById('editRecordId');
+    
+    // 全局变量
+    let records = [];
+    let filteredRecords = [];
+    let currentPage = 1;
+    let pageSize = 10;
+    let totalPages = 1;
+    let selectedRecordId = null;
+    let currentAccountName = ''; // 存储当前账户名称
+    
+    // 接收主进程传递的账户名称
+    ipcRenderer.on('set-account-name', (event, accountName) => {
+      currentAccountName = accountName;
+      // 重新加载记录
+      loadRecords();
+    });
+    
+    // 页面加载时获取数据
+    window.addEventListener('DOMContentLoaded', async () => {
+      await loadRecords();
+    });
+    
+    // 加载记录数据
+    async function loadRecords() {
+      try {
+        // 从主进程获取数据，传递当前账户名称作为参数
+        records = await ipcRenderer.invoke('get-records', currentAccountName);
+        applyFilters();
+      } catch (error) {
+        console.error('加载记录失败:', error);
+        showNoData();
+      }
+    }
+    
+    // 应用筛选条件
+    function applyFilters() {
+      const industry = industryFilter.value;
+      const time = timeFilter.value;
+      const search = searchInput.value.toLowerCase().trim();
+      
+      filteredRecords = records.filter(record => {
+        // 学科领域筛选
+        if (industry !== 'all' && record.industry !== industry) {
+          return false;
+        }
+        
+        // 时间范围筛选
+        if (time !== 'all') {
+          const recordDate = new Date(record.createTime);
+          const now = new Date();
+          
+          if (time === 'today') {
+            // 今天
+            if (recordDate.toDateString() !== now.toDateString()) {
+              return false;
+            }
+          } else if (time === 'week') {
+            // 最近一周
+            const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+            if (recordDate < weekAgo) {
+              return false;
+            }
+          } else if (time === 'month') {
+            // 最近一个月
+            const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+            if (recordDate < monthAgo) {
+              return false;
+            }
+          } else if (time === 'year') {
+            // 最近一年
+            const yearAgo = new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000);
+            if (recordDate < yearAgo) {
+              return false;
+            }
+          }
+        }
+        
+        // 关键词搜索筛选
+        if (search && !record.word.toLowerCase().includes(search)) {
+          return false;
+        }
+        
+        return true;
+      });
+      
+      // 更新总页数
+      totalPages = Math.max(1, Math.ceil(filteredRecords.length / pageSize));
+      
+      // 确保当前页在有效范围内
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
+      
+      // 更新UI显示
+      renderRecords();
+      updatePagination();
+    }
+    
+    // 渲染记录数据到表格
+    function renderRecords() {
+      // 清空表格内容
+      recordsTableBody.innerHTML = '';
+      
+      // 计算当前页的数据范围
+      const start = (currentPage - 1) * pageSize;
+      const end = Math.min(start + pageSize, filteredRecords.length);
+      const pageRecords = filteredRecords.slice(start, end);
+      
+      // 如果没有数据，显示提示信息
+      if (pageRecords.length === 0) {
+        showNoData();
+        return;
+      }
+      
+      // 隐藏无数据提示
+      noDataMessage.style.display = 'none';
+      recordsTableBody.parentElement.style.display = 'table';
+      
+      // 重置选择状态
+      selectedRecordId = null;
+      updateActionButtons();
+      
+      // 添加数据行
+      pageRecords.forEach(record => {
+        const row = document.createElement('tr');
+        row.dataset.id = record.id;
+        
+        // 添加点击事件，选中/取消选中行
+        row.addEventListener('click', () => {
+          if (selectedRecordId === record.id) {
+            // 取消选择
+            selectedRecordId = null;
+            row.classList.remove('selected-row');
+          } else {
+            // 取消之前的选择
+            const prevSelected = recordsTableBody.querySelector('.selected-row');
+            if (prevSelected) {
+              prevSelected.classList.remove('selected-row');
+            }
+            
+            // 新的选择
+            selectedRecordId = record.id;
+            row.classList.add('selected-row');
+          }
+          
+          // 更新操作按钮状态
+          updateActionButtons();
+        });
+        
+        // 添加生词单元格
+        const wordCell = document.createElement('td');
+        wordCell.textContent = record.word;
+        row.appendChild(wordCell);
+        
+        // 添加学科领域单元格
+        const industryCell = document.createElement('td');
+        industryCell.textContent = record.industry;
+        row.appendChild(industryCell);
+        
+        // 添加创建时间单元格
+        const timeCell = document.createElement('td');
+        const date = new Date(record.createTime);
+        timeCell.textContent = formatDate(date);
+        row.appendChild(timeCell);
+        
+        // 添加URL单元格
+        const urlCell = document.createElement('td');
+        if (record.url) {
+          const urlLink = document.createElement('a');
+          urlLink.textContent = '查看链接';
+          urlLink.className = 'url-link';
+          urlLink.addEventListener('click', (e) => {
+            e.stopPropagation(); // 防止触发行的点击事件
+            shell.openExternal(record.url);
+          });
+          urlCell.appendChild(urlLink);
+        } else {
+          urlCell.textContent = '无';
+        }
+        row.appendChild(urlCell);
+        
+        // 添加行到表格
+        recordsTableBody.appendChild(row);
+      });
+    }
+    
+    // 格式化日期
+    function formatDate(date) {
+      return `${date.getFullYear()}-${padZero(date.getMonth() + 1)}-${padZero(date.getDate())} ${padZero(date.getHours())}:${padZero(date.getMinutes())}`;
+    }
+    
+    // 数字补零
+    function padZero(num) {
+      return num < 10 ? `0${num}` : num;
+    }
+    
+    // 更新分页控件
+    function updatePagination() {
+      // 如果只有一页，隐藏分页控件
+      if (totalPages <= 1) {
+        pagination.style.display = 'none';
+        return;
+      }
+      
+      // 显示分页控件
+      pagination.style.display = 'flex';
+      
+      // 清空页码
+      pageNumbers.innerHTML = '';
+      
+      // 确定要显示的页码范围（最多显示5个页码）
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      
+      // 调整开始页码，确保总是显示5个页码（如果总页数>=5）
+      if (totalPages >= 5 && endPage - startPage + 1 < 5) {
+        startPage = Math.max(1, endPage - 4);
+      }
+      
+      // 添加页码按钮
+      for (let i = startPage; i <= endPage; i++) {
+        const pageBtn = document.createElement('div');
+        pageBtn.textContent = i;
+        pageBtn.className = `page-number ${i === currentPage ? 'active-page' : 'inactive-page'}`;
+        
+        // 添加点击事件
+        if (i !== currentPage) {
+          pageBtn.addEventListener('click', () => {
+            currentPage = i;
+            renderRecords();
+            updatePagination();
+          });
+        }
+        
+        pageNumbers.appendChild(pageBtn);
+      }
+      
+      // 更新上一页/下一页按钮状态
+      prevPageBtn.disabled = currentPage === 1;
+      nextPageBtn.disabled = currentPage === totalPages;
+    }
+    
+    // 显示"无数据"提示
+    function showNoData() {
+      recordsTableBody.parentElement.style.display = 'none';
+      noDataMessage.style.display = 'block';
+      // 禁用操作按钮
+      selectedRecordId = null;
+      updateActionButtons();
+    }
+    
+    // 更新操作按钮状态
+    function updateActionButtons() {
+      const hasSelection = selectedRecordId !== null;
+      editBtn.disabled = !hasSelection;
+      deleteBtn.disabled = !hasSelection;
+    }
+    
+    // 返回按钮点击事件
+    backBtn.addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+    
+    // 筛选和搜索事件
+    industryFilter.addEventListener('change', applyFilters);
+    timeFilter.addEventListener('change', applyFilters);
+    searchBtn.addEventListener('click', applyFilters);
+    searchInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        applyFilters();
+      }
+    });
+    
+    // 上一页按钮点击事件
+    prevPageBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderRecords();
+        updatePagination();
+      }
+    });
+    
+    // 下一页按钮点击事件
+    nextPageBtn.addEventListener('click', () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderRecords();
+        updatePagination();
+      }
+    });
+    
+    // 编辑按钮点击事件
+    editBtn.addEventListener('click', () => {
+      if (!selectedRecordId) return;
+      
+      const record = records.find(r => r.id === selectedRecordId);
+      if (!record) return;
+      
+      // 填充表单
+      editWord.value = record.word;
+      editIndustry.value = record.industry;
+      editUrl.value = record.url || '';
+      editRecordId.value = record.id;
+      
+      // 显示模态框
+      editModal.style.display = 'flex';
+    });
+    
+    // 删除按钮点击事件
+    deleteBtn.addEventListener('click', async () => {
+      if (!selectedRecordId) return;
+      
+      if (confirm('确定要删除这条记录吗？')) {
+        try {
+          await ipcRenderer.invoke('delete-record', selectedRecordId);
+          // 重新加载数据
+          await loadRecords();
+        } catch (error) {
+          console.error('删除记录失败:', error);
+          alert('删除记录失败: ' + error.message);
+        }
+      }
+    });
+    
+    // 导出按钮点击事件
+    exportBtn.addEventListener('click', async () => {
+      try {
+        await ipcRenderer.invoke('export-records-csv');
+        alert('导出成功！');
+      } catch (error) {
+        console.error('导出失败:', error);
+        alert('导出失败: ' + error.message);
+      }
+    });
+    
+    // 模态框关闭按钮点击事件
+    modalCloseBtn.addEventListener('click', () => {
+      editModal.style.display = 'none';
+    });
+    
+    // 模态框取消按钮点击事件
+    modalCancelBtn.addEventListener('click', () => {
+      editModal.style.display = 'none';
+    });
+    
+    // 模态框保存按钮点击事件
+    modalSaveBtn.addEventListener('click', async () => {
+      const recordId = editRecordId.value;
+      const updatedRecord = {
+        id: recordId,
+        word: editWord.value.trim(),
+        industry: editIndustry.value,
+        url: editUrl.value.trim()
+      };
+      
+      if (!updatedRecord.word) {
+        alert('生词不能为空！');
+        return;
+      }
+      
+      try {
+        await ipcRenderer.invoke('update-record', updatedRecord);
+        // 关闭模态框
+        editModal.style.display = 'none';
+        // 重新加载数据
+        await loadRecords();
+      } catch (error) {
+        console.error('更新记录失败:', error);
+        alert('更新记录失败: ' + error.message);
+      }
+    });
+    
+    // 点击模态框外部关闭模态框
+    editModal.addEventListener('click', (e) => {
+      if (e.target === editModal) {
+        editModal.style.display = 'none';
+      }
+    });
+    
+    // 添加样式：选中行样式
+    const style = document.createElement('style');
+    style.textContent = `
+      .selected-row {
+        background-color: #FFE0E0 !important;
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
